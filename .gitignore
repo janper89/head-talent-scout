@@ -1,0 +1,24 @@
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# Local env
+.env
+.env.*
+
+# Project data (generated / downloaded)
+data/
+
+# OCR test artifacts (generated)
+cts_ocr_test_data/*_page*.png
+cts_ocr_test_data/ocr_test_results_*.json
+
+# Cursor/IDE
+.cursor/
+

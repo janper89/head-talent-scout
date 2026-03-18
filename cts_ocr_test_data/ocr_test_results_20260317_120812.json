@@ -1,0 +1,283 @@
+{
+  "babytenis_jpg": {
+    "success": true,
+    "input_tokens": 3681,
+    "output_tokens": 1478,
+    "data": {
+      "turnaj": "Babytenis zima 2025 — Renáta Voráčová akademie",
+      "pocet_hracu": 9,
+      "hraci": [
+        {
+          "jmeno": "Kratka Tobias",
+          "klub": null,
+          "skupina": "A",
+          "umisteni_skupina": 1,
+          "umisteni_celkove": 1,
+          "zapasy": [
+            {
+              "protivnik": "Barla Alexandre",
+              "vysledek": "4:0",
+              "vyhra": true
+            },
+            {
+              "protivnik": "Kadlecova Karolina",
+              "vysledek": "4:0",
+              "vyhra": true
+            },
+            {
+              "protivnik": "Jimericka Sara",
+              "vysledek": "4:0",
+              "vyhra": true
+            }
+          ]
+        },
+        {
+          "jmeno": "Barla Alexandre",
+          "klub": null,
+          "skupina": "A",
+          "umisteni_skupina": 2,
+          "umisteni_celkove": 3,
+          "zapasy": [
+            {
+              "protivnik": "Kratka Tobias",
+              "vysledek": "0:4",
+              "vyhra": false
+            },
+            {
+              "protivnik": "Kadlecova Karolina",
+              "vysledek": "4:0",
+              "vyhra": true
+            },
+            {
+              "protivnik": "Jimericka Sara",
+              "vysledek": "1:4",
+              "vyhra": false
+            }
+          ]
+        },
+        {
+          "jmeno": "Kadlecova Karolina",
+          "klub": null,
+          "skupina": "A",
+          "umisteni_skupina": 3,
+          "umisteni_celkove": 4,
+          "zapasy": [
+            {
+              "protivnik": "Kratka Tobias",
+              "vysledek": "0:4",
+              "vyhra": false
+            },
+            {
+              "protivnik": "Barla Alexandre",
+              "vysledek": "0:4",
+              "vyhra": false
+            },
+            {
+              "protivnik": "Jimericka Sara",
+              "vysledek": "0:4",
+              "vyhra": false
+            }
+          ]
+        },
+        {
+          "jmeno": "Jimericka Sara",
+          "klub": null,
+          "skupina": "A",
+          "umisteni_skupina": 4,
+          "umisteni_celkove": 2,
+          "zapasy": [
+            {
+              "protivnik": "Kratka Tobias",
+              "vysledek": "0:4",
+              "vyhra": false
+            },
+            {
+              "protivnik": "Barla Alexandre",
+              "vysledek": "4:1",
+              "vyhra": true
+            },
+            {
+              "protivnik": "Kadlecova Karolina",
+              "vysledek": "4:0",
+              "vyhra": true
+            }
+          ]
+        },
+        {
+          "jmeno": "Prechnal Jozef",
+          "klub": null,
+          "skupina": "B",
+          "umisteni_skupina": 1,
+          "umisteni_celkove": 4,
+          "zapasy": [
+            {
+              "protivnik": "Artemev Timofey",
+              "vysledek": "4:1",
+              "vyhra": true
+            },
+            {
+              "protivnik": "Pazelova Jelous",
+              "vysledek": "4:1",
+              "vyhra": true
+            },
+            {
+              "protivnik": "Krejcova Natka",
+              "vysledek": "4:0",
+              "vyhra": true
+            }
+          ]
+        },
+        {
+          "jmeno": "Artemev Timofey",
+          "klub": null,
+          "skupina": "B",
+          "umisteni_skupina": 2,
+          "umisteni_celkove": 2,
+          "zapasy": [
+            {
+              "protivnik": "Prechnal Jozef",
+              "vysledek": "1:4",
+              "vyhra": false
+            },
+            {
+              "protivnik": "Pazelova Jelous",
+              "vysledek": "4:1",
+              "vyhra": true
+            },
+            {
+              "protivnik": "Krejcova Natka",
+              "vysledek": "4:1",
+              "vyhra": true
+            }
+          ]
+        },
+        {
+          "jmeno": "Pazelova Jelous",
+          "klub": null,
+          "skupina": "B",
+          "umisteni_skupina": 3,
+          "umisteni_celkove": 4,
+          "zapasy": [
+            {
+              "protivnik": "Prechnal Jozef",
+              "vysledek": "1:4",
+              "vyhra": false
+            },
+            {
+              "protivnik": "Artemev Timofey",
+              "vysledek": "1:4",
+              "vyhra": false
+            },
+            {
+              "protivnik": "Krejcova Natka",
+              "vysledek": "0:4",
+              "vyhra": false
+            }
+          ]
+        },
+        {
+          "jmeno": "Krejcova Natka",
+          "klub": null,
+          "skupina": "B",
+          "umisteni_skupina": 4,
+          "umisteni_celkove": 3,
+          "zapasy": [
+            {
+              "protivnik": "Prechnal Jozef",
+              "vysledek": "0:4",
+              "vyhra": false
+            },
+            {
+              "protivnik": "Artemev Timofey",
+              "vysledek": "1:4",
+              "vyhra": false
+            },
+            {
+              "protivnik": "Pazelova Jelous",
+              "vysledek": "4:0",
+              "vyhra": true
+            }
+          ]
+        },
+        {
+          "jmeno": "Artemev Hiroslav",
+          "klub": "ARTEMIS",
+          "skupina": null,
+          "umisteni_skupina": null,
+          "umisteni_celkove": 1,
+          "zapasy": []
+        }
+      ]
+    },
+    "error": null
+  },
+  "babytenis_pdf": {
+    "success": true,
+    "input_tokens": 3647,
+    "output_tokens": 528,
+    "data": {
+      "turnaj": "O POHÁR SK JC SPORT OPAVA — oranžový kurt",
+      "pocet_hracu": 3,
+      "hraci": [
+        {
+          "jmeno": "FRÝDLANT \"B\"",
+          "klub": "FRÝDLANT \"B\"",
+          "skupina": "A",
+          "umisteni_skupina": 1,
+          "umisteni_celkove": 1,
+          "zapasy": [
+            {
+              "protivnik": "SK JC SPORT OPAVA \"A\"",
+              "vysledek": "1/3",
+              "vyhra": false
+            },
+            {
+              "protivnik": "TK MILO OLOMOUC",
+              "vysledek": "3/1",
+              "vyhra": true
+            }
+          ]
+        },
+        {
+          "jmeno": "SK JC SPORT OPAVA \"A\"",
+          "klub": "SK JC SPORT OPAVA \"A\"",
+          "skupina": "A",
+          "umisteni_skupina": 2,
+          "umisteni_celkove": 2,
+          "zapasy": [
+            {
+              "protivnik": "FRÝDLANT \"B\"",
+              "vysledek": "3/1",
+              "vyhra": true
+            },
+            {
+              "protivnik": "TK MILO OLOMOUC",
+              "vysledek": "2/2",
+              "vyhra": false
+            }
+          ]
+        },
+        {
+          "jmeno": "TK MILO OLOMOUC",
+          "klub": "TK MILO OLOMOUC",
+          "skupina": "A",
+          "umisteni_skupina": 3,
+          "umisteni_celkove": 3,
+          "zapasy": [
+            {
+              "protivnik": "SK JC SPORT OPAVA \"A\"",
+              "vysledek": "2/2",
+              "vyhra": true
+            },
+            {
+              "protivnik": "FRÝDLANT \"B\"",
+              "vysledek": "1/3",
+              "vyhra": false
+            }
+          ]
+        }
+      ]
+    },
+    "error": null
+  }
+}

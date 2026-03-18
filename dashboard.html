@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEAD Talent Scout — Žebříček mladých hráčů</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --head-red: #E31937;
+            --head-dark: #1a1a2e;
+            --head-darker: #0f0f1f;
+            --surface: #16162a;
+            --surface-light: #1e1e38;
+            --surface-hover: #252545;
+            --text: #e8e8f0;
+            --text-muted: #8888aa;
+            --text-dim: #555577;
+            --accent-green: #22c55e;
+            --accent-yellow: #eab308;
+            --accent-blue: #3b82f6;
+            --border: #2a2a4a;
+            --radius: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--head-darker);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, var(--head-dark) 0%, #1a0a1e 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 24px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-family: 'Space Mono', monospace;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--head-red);
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--text-muted);
+            font-weight: 400;
+            font-size: 16px;
+            margin-left: 8px;
+        }
+
+        .header-badge {
+            background: var(--head-red);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 32px;
+        }
+
+        .header-stat {
+            text-align: right;
+        }
+
+        .header-stat-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .header-stat-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* FILTERS */
+        .filters {
+            padding: 16px 40px;
+            display: flex;
+            gap: 12px;
+            border-bottom: 1px solid var(--border);
+            background: var(--head-dark);
+        }
+
+        .filter-btn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 8px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            background: var(--surface-hover);
+            color: var(--text);
+        }
+
+        .filter-btn.active {
+            background: var(--head-red);
+            border-color: var(--head-red);
+            color: white;
+        }
+
+        .search-input {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            width: 260px;
+            margin-left: auto;
+        }
+
+        .search-input::placeholder { color: var(--text-dim); }
+        .search-input:focus { outline: none; border-color: var(--head-red); }
+
+        .region-select {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238888aa' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 32px;
+        }
+
+        .region-select:focus { outline: none; border-color: var(--head-red); }
+
+        .region-badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: var(--surface-hover);
+            color: var(--text-dim);
+            margin-left: 6px;
+        }
+
+        /* MAIN CONTENT */
+        .main {
+            padding: 32px 40px;
+        }
+
+        /* RANKING TABLE */
+        .ranking-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 4px;
+        }
+
+        .ranking-table th {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .ranking-table th.sortable {
+            cursor: pointer;
+        }
+
+        .ranking-table th.sortable:hover {
+            color: var(--text-muted);
+        }
+
+        .ranking-row {
+            background: var(--surface);
+            transition: all 0.15s;
+            cursor: pointer;
+        }
+
+        .ranking-row:hover {
+            background: var(--surface-hover);
+            transform: translateX(4px);
+        }
+
+        .ranking-row td {
+            padding: 14px 16px;
+            font-size: 14px;
+        }
+
+        .ranking-row td:first-child {
+            border-radius: var(--radius) 0 0 var(--radius);
+            width: 60px;
+        }
+
+        .ranking-row td:last-child {
+            border-radius: 0 var(--radius) var(--radius) 0;
+        }
+
+        .rank-number {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--text-dim);
+        }
+
+        .rank-1 .rank-number { color: #fbbf24; }
+        .rank-2 .rank-number { color: #94a3b8; }
+        .rank-3 .rank-number { color: #cd7f32; }
+
+        .player-name {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .player-club {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .player-birth {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .stat-points {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--head-red);
+        }
+
+        .stat-tournaments {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .stat-winrate {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .winrate-bar {
+            width: 60px;
+            height: 6px;
+            background: var(--surface-hover);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .winrate-fill {
+            height: 100%;
+            border-radius: 3px;
+            background: var(--accent-green);
+        }
+
+        .winrate-text {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .scouting-tag {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tag-hot {
+            background: rgba(227, 25, 55, 0.15);
+            color: var(--head-red);
+            border: 1px solid rgba(227, 25, 55, 0.3);
+        }
+
+        .tag-rising {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--accent-green);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .tag-watch {
+            background: rgba(234, 179, 8, 0.15);
+            color: var(--accent-yellow);
+            border: 1px solid rgba(234, 179, 8, 0.3);
+        }
+
+        /* PLAYER DETAIL MODAL */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 100;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.active { display: flex; align-items: center; justify-content: center; }
+
+        .modal {
+            background: var(--head-dark);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            width: 640px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 32px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 24px;
+        }
+
+        .modal-name {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .modal-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .modal-stat-card {
+            background: var(--surface);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .modal-stat-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .modal-stat-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        .modal-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .tournament-list {
+            list-style: none;
+        }
+
+        .tournament-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+            background: var(--surface);
+            border-radius: 8px;
+            margin-bottom: 6px;
+        }
+
+        .tournament-item-name {
+            font-size: 13px;
+        }
+
+        .tournament-item-result {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+        }
+
+        .tournament-item-result .poradi { color: var(--accent-yellow); }
+        .tournament-item-result .body { color: var(--head-red); margin-left: 8px; }
+
+        /* EMPTY STATE */
+        .empty-state {
+            text-align: center;
+            padding: 80px 40px;
+            color: var(--text-dim);
+        }
+
+        .empty-state h2 {
+            font-size: 20px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .empty-state p {
+            font-size: 14px;
+            line-height: 1.6;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .empty-state code {
+            display: block;
+            background: var(--surface);
+            padding: 16px;
+            border-radius: 8px;
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            color: var(--accent-green);
+            margin-top: 20px;
+            text-align: left;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .header { flex-direction: column; gap: 16px; padding: 20px; }
+            .header-stats { gap: 20px; }
+            .filters { padding: 12px 20px; flex-wrap: wrap; }
+            .main { padding: 20px; }
+            .search-input { width: 100%; margin-left: 0; }
+            .modal { width: 95%; margin: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="header-left">
+        <div class="logo">HEAD<span>Talent Scout</span></div>
+        <div class="header-badge">Beta</div>
+    </div>
+    <div class="header-stats">
+        <div class="header-stat">
+            <div class="header-stat-value" id="stat-players">—</div>
+            <div class="header-stat-label">Hráčů</div>
+        </div>
+        <div class="header-stat">
+            <div class="header-stat-value" id="stat-tournaments">—</div>
+            <div class="header-stat-label">Turnajů</div>
+        </div>
+        <div class="header-stat">
+            <div class="header-stat-value" id="stat-updated">—</div>
+            <div class="header-stat-label">Aktualizace</div>
+        </div>
+    </div>
+</div>
+
+<div class="filters">
+    <button class="filter-btn active" id="view-ranking">Žebříček</button>
+    <button class="filter-btn" id="view-tips">Tipy</button>
+    <button class="filter-btn active" data-filter="all">Všechny kategorie</button>
+    <button class="filter-btn" data-filter="minitenis">Mini tenis</button>
+    <button class="filter-btn" data-filter="babytenis">Baby tenis</button>
+    <button class="filter-btn" data-filter="mladsi_zactvo">Mladší žáci</button>
+    <select class="region-select" id="region-filter">
+        <option value="all">📍 Všechny regiony</option>
+        <option value="praha">Praha</option>
+        <option value="stredocesky">Středočeský</option>
+        <option value="jihocesky">Jihočeský</option>
+        <option value="zapadocesky">Západočeský</option>
+        <option value="severocesky">Severočeský</option>
+        <option value="vychodocesky">Východočeský</option>
+        <option value="jihomoravsky">Jihomoravský</option>
+        <option value="severomoravsky">Severomoravský</option>
+    </select>
+    <input type="text" class="search-input" id="search" placeholder="Hledat hráče nebo klub...">
+</div>
+
+<div class="main">
+    <div id="ranking-view">
+        <table class="ranking-table" id="ranking-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Hráč</th>
+                    <th>Ročník</th>
+                    <th class="sortable" data-sort="body">Body ↓</th>
+                    <th class="sortable" data-sort="turnaje">Turnaje</th>
+                    <th>Win rate</th>
+                    <th>Scout</th>
+                </tr>
+            </thead>
+            <tbody id="ranking-body">
+            </tbody>
+        </table>
+    </div>
+
+    <div id="tips-view" style="display:none;">
+        <div class="empty-state" id="tips-empty" style="display:none;">
+            <h2>Žádné tipy k zobrazení</h2>
+            <p>Po analýze se vygeneruje <code>data/tips_pending.json</code>. Pokud používáš server, můžeš tipy i schvalovat a označovat jako odeslané.</p>
+        </div>
+        <div id="tips-list"></div>
+    </div>
+    
+    <div class="empty-state" id="empty-state" style="display:none;">
+        <h2>Žádná data k zobrazení</h2>
+        <p>Spusť scraping a analýzu pro naplnění dashboardu:</p>
+        <code>
+            # 1. Scrape turnaje (test na 5 turnajích)<br>
+            python3 scraper.py --categories babytenis --max 5<br><br>
+            # 2. Analyzuj výsledky<br>
+            python3 analyzer.py --input data/scrape_*.json --max 5<br><br>
+            # 3. Otevři dashboard<br>
+            python3 -m http.server 8000
+        </code>
+    </div>
+</div>
+
+<!-- Player Detail Modal -->
+<div class="modal-overlay" id="modal-overlay">
+    <div class="modal" id="modal">
+        <div class="modal-header">
+            <div>
+                <div class="modal-name" id="modal-name"></div>
+                <div class="player-club" id="modal-club"></div>
+            </div>
+            <button class="modal-close" onclick="closeModal()">✕</button>
+        </div>
+        <div class="modal-stats" id="modal-stats"></div>
+        <div class="modal-section-title">Historie turnajů</div>
+        <ul class="tournament-list" id="modal-tournaments"></ul>
+    </div>
+</div>
+
+<script>
+let rankingData = null;
+let currentSort = 'body';
+let currentFilter = 'all';
+let currentRegion = 'all';
+let tipsData = null;
+let tipsApiAvailable = false;
+
+// Region detection from club name
+const REGION_MAP = {
+    'severomoravsky': [
+        'opava', 'ostrava', 'karviná', 'havířov', 'frýdek', 'místek', 'frýdlant',
+        'nový jičín', 'olomouc', 'přerov', 'šumperk', 'prostějov', 'zlín',
+        'uherský brod', 'uherské hradiště', 'valašské meziříčí', 'vsetín',
+        'třinec', 'kopřivnice', 'poruba', 'vítkovice', 'slezsko'
+    ],
+    'jihomoravsky': [
+        'brno', 'znojmo', 'břeclav', 'hodonín', 'vyškov', 'blansko',
+        'tišnov', 'komín', 'líšeň', 'žltc', 'bltc', 'slavkov',
+        'třebíč', 'jihlava', 'žďár', 'havlíčkův brod', 'pelhřimov'
+    ],
+    'praha': [
+        'praha', 'čltk', 'sparta praha', 'i.čltk', 'tc eso',
+        'radlice', 'písnice', 'počernice', 'kolovraty', 'satalice',
+        'modřany', 'újezd nad lesy', 'cibulka', 'vestecká', 'hamr'
+    ],
+    'stredocesky': [
+        'rudná', 'říčany', 'králův dvůr', 'mladá boleslav', 'kolín',
+        'benešov', 'příbram', 'kladno', 'mělník', 'beroun', 'houštka',
+        'roudnice', 'nehvizdy', 'jesenice'
+    ],
+    'jihocesky': [
+        'české budějovice', 'tábor', 'písek', 'strakonice', 'prachatice',
+        'jindřichův hradec', 'český krumlov'
+    ],
+    'zapadocesky': [
+        'plzeň', 'karlovy vary', 'cheb', 'sokolov', 'domažlice',
+        'klatovy', 'rokycany', 'slavia plzeň', 'lokomotiva plzeň'
+    ],
+    'severocesky': [
+        'liberec', 'jablonec', 'ústí', 'děčín', 'teplice', 'most',
+        'chomutov', 'litvínov', 'česká lípa', 'semily'
+    ],
+    'vychodocesky': [
+        'hradec králové', 'pardubice', 'svitavy', 'chrudim', 'trutnov',
+        'náchod', 'žamberk', 'ústí n. orlicí', 'choceň', 'česká třebová',
+        'polička', 'vysoké mýto', 'dvůr králové', 'tesla pardubice'
+    ],
+};
+
+function detectRegion(klub) {
+    if (!klub) return 'neznámý';
+    const lower = klub.toLowerCase();
+    for (const [region, keywords] of Object.entries(REGION_MAP)) {
+        for (const kw of keywords) {
+            if (lower.includes(kw)) return region;
+        }
+    }
+    return 'neznámý';
+}
+
+const REGION_LABELS = {
+    'severomoravsky': 'Severomoravský',
+    'jihomoravsky': 'Jihomoravský',
+    'praha': 'Praha',
+    'stredocesky': 'Středočeský',
+    'jihocesky': 'Jihočeský',
+    'zapadocesky': 'Západočeský',
+    'severocesky': 'Severočeský',
+    'vychodocesky': 'Východočeský',
+    'neznámý': '?',
+};
+
+// Load data
+async function loadData() {
+    try {
+        const resp = await fetch('data/dashboard_data.json');
+        if (!resp.ok) throw new Error('No data file');
+        const data = await resp.json();
+        rankingData = data.ranking;
+        
+        document.getElementById('stat-players').textContent = rankingData.total_players;
+        document.getElementById('stat-tournaments').textContent = rankingData.total_tournaments;
+        document.getElementById('stat-updated').textContent = new Date(data.generated_at).toLocaleDateString('cs-CZ');
+        
+        renderTable(rankingData.ranking);
+    } catch (e) {
+        console.log('No data yet, showing empty state');
+        document.getElementById('empty-state').style.display = 'block';
+        
+        // Load demo data for preview
+        loadDemoData();
+    }
+}
+
+async function loadTips() {
+    // Prefer API (allows persistence). Fallback to static JSON.
+    try {
+        const resp = await fetch('/api/tips');
+        if (resp.ok) {
+            tipsApiAvailable = true;
+            tipsData = await resp.json();
+            renderTips();
+            return;
+        }
+    } catch (e) {}
+
+    try {
+        const resp = await fetch('data/tips_pending.json');
+        if (!resp.ok) throw new Error('No tips file');
+        tipsApiAvailable = false;
+        tipsData = await resp.json();
+        renderTips();
+    } catch (e) {
+        tipsData = { tips: [] };
+        renderTips();
+    }
+}
+
+function tierBadge(tier) {
+    if (tier === 1) return '<span class="scouting-tag tag-hot">Tier 1</span>';
+    if (tier === 2) return '<span class="scouting-tag tag-rising">Tier 2</span>';
+    if (tier === 3) return '<span class="scouting-tag tag-watch">Tier 3</span>';
+    return '';
+}
+
+function escapeHtml(s) {
+    return (s || '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+}
+
+function renderTips() {
+    const list = document.getElementById('tips-list');
+    const tips = (tipsData && tipsData.tips) ? tipsData.tips : [];
+    const pending = tips.filter(t => (t.status || 'pending') !== 'sent');
+    document.getElementById('tips-empty').style.display = pending.length ? 'none' : 'block';
+
+    list.innerHTML = pending.map(t => {
+        const status = t.status || 'pending';
+        const disabled = tipsApiAvailable ? '' : 'disabled';
+        const contact = t.recipient_email ? escapeHtml(t.recipient_email) : '—';
+        const reason = escapeHtml(t.reason_summary || '');
+        const subj = escapeHtml(t.mail_subject || '');
+        const body = escapeHtml(t.mail_body || '');
+        return `
+          <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px; margin-bottom:10px;">
+            <div style="display:flex; justify-content:space-between; gap:12px; align-items:flex-start;">
+              <div>
+                <div style="font-weight:700; font-size:16px;">${escapeHtml(t.player_name || '')} <span style="color:var(--text-muted); font-weight:500;">(${t.birth_year || '—'})</span></div>
+                <div style="color:var(--text-muted); font-size:13px; margin-top:2px;">${escapeHtml(t.club_name || '—')} • ${escapeHtml(t.category || '')}</div>
+                <div style="margin-top:8px;">${tierBadge(t.tier)} <span style="color:var(--text-muted); font-size:12px; margin-left:8px;">${reason}</span></div>
+              </div>
+              <div style="text-align:right; min-width:220px;">
+                <div style="font-size:12px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Příjemce</div>
+                <div style="font-family:'Space Mono', monospace; font-size:13px; color:var(--text); margin-top:2px;">${contact}</div>
+              </div>
+            </div>
+
+            <div style="margin-top:12px; display:grid; gap:10px;">
+              <div>
+                <div style="font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Předmět</div>
+                <input data-tipid="${t.tip_id}" data-field="mail_subject" value="${subj}" ${disabled}
+                  style="width:100%; background:var(--head-dark); border:1px solid var(--border); color:var(--text); padding:10px 12px; border-radius:10px;">
+              </div>
+              <div>
+                <div style="font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Text mailu</div>
+                <textarea data-tipid="${t.tip_id}" data-field="mail_body" ${disabled}
+                  style="width:100%; min-height:140px; resize:vertical; background:var(--head-dark); border:1px solid var(--border); color:var(--text); padding:10px 12px; border-radius:10px;">${body}</textarea>
+              </div>
+            </div>
+
+            <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+              <button class="filter-btn" onclick="saveTip('${t.tip_id}')" ${disabled}>Uložit úpravy</button>
+              <button class="filter-btn" onclick="rejectTip('${t.tip_id}')" ${disabled}>Zamítnout</button>
+              <button class="filter-btn active" onclick="markSent('${t.tip_id}')" ${disabled}>Odesláno</button>
+              ${tipsApiAvailable ? '' : '<span style="color:var(--text-dim); font-size:12px;">Akce vyžadují běh přes <code>python3 server.py</code>.</span>'}
+            </div>
+          </div>
+        `;
+    }).join('');
+}
+
+async function saveTip(tipId) {
+    if (!tipsApiAvailable) return;
+    const subjectEl = document.querySelector(`[data-tipid="${tipId}"][data-field="mail_subject"]`);
+    const bodyEl = document.querySelector(`[data-tipid="${tipId}"][data-field="mail_body"]`);
+    const payload = {
+        mail_subject: subjectEl ? subjectEl.value : '',
+        mail_body: bodyEl ? bodyEl.value : '',
+        status: 'pending',
+    };
+    await fetch(`/api/tips/${tipId}/update`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    await loadTips();
+}
+
+async function rejectTip(tipId) {
+    if (!tipsApiAvailable) return;
+    await fetch(`/api/tips/${tipId}/update`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status: 'rejected' }) });
+    await loadTips();
+}
+
+async function markSent(tipId) {
+    if (!tipsApiAvailable) return;
+    await fetch(`/api/tips/${tipId}/mark_sent`, { method: 'POST' });
+    await loadTips();
+}
+
+function loadDemoData() {
+    // Demo data from the Sparta AGEL Minitenis Tour
+    const demo = [
+        { poradi: 1, jmeno: "Šafářová Viktorie", klub: "TK Sparta Praha", rok_narozeni: "2018", body_celkem: 200, turnaje: [{turnaj: "1. Sparta AGEL Minitenis Tour Z26", poradi: 1, body: 200}], zapasy_vyhra: 5, zapasy_prohra: 0 },
+        { poradi: 2, jmeno: "Nježićová Soňa", klub: "TK Sparta Praha", rok_narozeni: "2018", body_celkem: 150, turnaje: [{turnaj: "1. Sparta AGEL Minitenis Tour Z26", poradi: 2, body: 150}], zapasy_vyhra: 4, zapasy_prohra: 1 },
+        { poradi: 3, jmeno: "Puebla Charlotte Martina", klub: "TK Sparta Praha", rok_narozeni: "2019", body_celkem: 100, turnaje: [{turnaj: "1. Sparta AGEL Minitenis Tour Z26", poradi: 3, body: 100}], zapasy_vyhra: 3, zapasy_prohra: 1 },
+        { poradi: 4, jmeno: "Barnet Sofia", klub: "TK Sparta Praha", rok_narozeni: "2018", body_celkem: 100, turnaje: [{turnaj: "1. Sparta AGEL Minitenis Tour Z26", poradi: 3, body: 100}], zapasy_vyhra: 3, zapasy_prohra: 2 },
+        { poradi: 5, jmeno: "Číž Filip", klub: "", rok_narozeni: "2018", body_celkem: 60, turnaje: [{turnaj: "1. Sparta AGEL Minitenis Tour Z26", poradi: 5, body: 60}], zapasy_vyhra: 2, zapasy_prohra: 2 },
+        { poradi: 6, jmeno: "Veselá Sofie", klub: "", rok_narozeni: "2018", body_celkem: 60, turnaje: [{turnaj: "1. Sparta AGEL Minitenis Tour Z26", poradi: 6, body: 60}], zapasy_vyhra: 2, zapasy_prohra: 2 },
+        { poradi: 7, jmeno: "Poldauf Eleonora", klub: "", rok_narozeni: "2019", body_celkem: 20, turnaje: [{turnaj: "1. Sparta AGEL Minitenis Tour Z26", poradi: 7, body: 20}], zapasy_vyhra: 1, zapasy_prohra: 2 },
+        { poradi: 8, jmeno: "Šafářová Adéla", klub: "TK Sparta Praha", rok_narozeni: "2019", body_celkem: 20, turnaje: [{turnaj: "1. Sparta AGEL Minitenis Tour Z26", poradi: 8, body: 20}], zapasy_vyhra: 2, zapasy_prohra: 2 },
+        { poradi: 9, jmeno: "Kosourová Olivie", klub: "", rok_narozeni: "2018", body_celkem: 20, turnaje: [{turnaj: "1. Sparta AGEL Minitenis Tour Z26", poradi: 9, body: 20}], zapasy_vyhra: 1, zapasy_prohra: 2 },
+        { poradi: 10, jmeno: "Kalina Tomáš", klub: "", rok_narozeni: "2019", body_celkem: 10, turnaje: [{turnaj: "1. Sparta AGEL Minitenis Tour Z26", poradi: 10, body: 10}], zapasy_vyhra: 1, zapasy_prohra: 3 },
+        { poradi: 11, jmeno: "Pastore Carlotta", klub: "", rok_narozeni: "2019", body_celkem: 10, turnaje: [{turnaj: "1. Sparta AGEL Minitenis Tour Z26", poradi: 11, body: 10}], zapasy_vyhra: 1, zapasy_prohra: 3 },
+        { poradi: 12, jmeno: "Ostrolucká Isabella", klub: "", rok_narozeni: "2019", body_celkem: 10, turnaje: [{turnaj: "1. Sparta AGEL Minitenis Tour Z26", poradi: 12, body: 10}], zapasy_vyhra: 1, zapasy_prohra: 2 },
+        { poradi: 13, jmeno: "Černý Dominik", klub: "", rok_narozeni: "2019", body_celkem: 5, turnaje: [{turnaj: "1. Sparta AGEL Minitenis Tour Z26", poradi: 13, body: 5}], zapasy_vyhra: 2, zapasy_prohra: 3 },
+        { poradi: 14, jmeno: "Blatská Kateřina", klub: "", rok_narozeni: "2019", body_celkem: 5, turnaje: [{turnaj: "1. Sparta AGEL Minitenis Tour Z26", poradi: 14, body: 5}], zapasy_vyhra: 0, zapasy_prohra: 3 },
+    ];
+    
+    document.getElementById('stat-players').textContent = demo.length;
+    document.getElementById('stat-tournaments').textContent = '1';
+    document.getElementById('stat-updated').textContent = 'Demo';
+    document.getElementById('empty-state').style.display = 'none';
+    
+    rankingData = { ranking: demo };
+    renderTable(demo);
+}
+
+function getScoutTag(player) {
+    const wr = player.zapasy_vyhra + player.zapasy_prohra > 0 
+        ? player.zapasy_vyhra / (player.zapasy_vyhra + player.zapasy_prohra) 
+        : 0;
+    
+    if (player.body_celkem >= 150 && wr >= 0.7) {
+        return '<span class="scouting-tag tag-hot">🔥 Top talent</span>';
+    }
+    if (wr >= 0.6 && player.turnaje.length >= 1) {
+        return '<span class="scouting-tag tag-rising">📈 Rising</span>';
+    }
+    if (player.turnaje.length >= 2) {
+        return '<span class="scouting-tag tag-watch">👀 Sledovat</span>';
+    }
+    return '';
+}
+
+function renderTable(players) {
+    const tbody = document.getElementById('ranking-body');
+    const searchTerm = document.getElementById('search').value.toLowerCase();
+    
+    let filtered = players;
+    
+    // Region filter
+    if (currentRegion !== 'all') {
+        filtered = filtered.filter(p => detectRegion(p.klub) === currentRegion);
+    }
+    
+    // Search filter
+    if (searchTerm) {
+        filtered = filtered.filter(p => 
+            p.jmeno.toLowerCase().includes(searchTerm) ||
+            (p.klub && p.klub.toLowerCase().includes(searchTerm))
+        );
+    }
+    
+    tbody.innerHTML = filtered.map((p, i) => {
+        const wr = p.zapasy_vyhra + p.zapasy_prohra > 0 
+            ? Math.round(p.zapasy_vyhra / (p.zapasy_vyhra + p.zapasy_prohra) * 100) 
+            : 0;
+        const rankClass = p.poradi <= 3 ? `rank-${p.poradi}` : '';
+        const region = detectRegion(p.klub);
+        const regionLabel = REGION_LABELS[region] || '?';
+        
+        return `
+            <tr class="ranking-row ${rankClass}" onclick="openModal(${i})">
+                <td><span class="rank-number">${p.poradi}</span></td>
+                <td>
+                    <div class="player-name">${p.jmeno}</div>
+                    <div class="player-club">${p.klub || '—'}${region !== 'neznámý' ? `<span class="region-badge">${regionLabel}</span>` : ''}</div>
+                </td>
+                <td><span class="player-birth">${p.rok_narozeni || '—'}</span></td>
+                <td><span class="stat-points">${p.body_celkem}</span></td>
+                <td><span class="stat-tournaments">${p.turnaje.length}</span></td>
+                <td>
+                    <div class="stat-winrate">
+                        <div class="winrate-bar"><div class="winrate-fill" style="width:${wr}%"></div></div>
+                        <span class="winrate-text">${wr}%</span>
+                    </div>
+                </td>
+                <td>${getScoutTag(p)}</td>
+            </tr>
+        `;
+    }).join('');
+}
+
+function openModal(index) {
+    const p = rankingData.ranking[index];
+    if (!p) return;
+    
+    document.getElementById('modal-name').textContent = p.jmeno;
+    document.getElementById('modal-club').textContent = p.klub || 'Klub neznámý';
+    
+    const wr = p.zapasy_vyhra + p.zapasy_prohra > 0 
+        ? Math.round(p.zapasy_vyhra / (p.zapasy_vyhra + p.zapasy_prohra) * 100) 
+        : 0;
+    
+    document.getElementById('modal-stats').innerHTML = `
+        <div class="modal-stat-card">
+            <div class="modal-stat-value" style="color:var(--head-red)">${p.body_celkem}</div>
+            <div class="modal-stat-label">Body</div>
+        </div>
+        <div class="modal-stat-card">
+            <div class="modal-stat-value">${p.turnaje.length}</div>
+            <div class="modal-stat-label">Turnaje</div>
+        </div>
+        <div class="modal-stat-card">
+            <div class="modal-stat-value" style="color:var(--accent-green)">${p.zapasy_vyhra}W</div>
+            <div class="modal-stat-label">Výhry</div>
+        </div>
+        <div class="modal-stat-card">
+            <div class="modal-stat-value">${wr}%</div>
+            <div class="modal-stat-label">Win rate</div>
+        </div>
+    `;
+    
+    document.getElementById('modal-tournaments').innerHTML = p.turnaje.map(t => `
+        <li class="tournament-item">
+            <span class="tournament-item-name">${t.turnaj}</span>
+            <span class="tournament-item-result">
+                <span class="poradi">${t.poradi}. místo</span>
+                <span class="body">+${t.body} b</span>
+            </span>
+        </li>
+    `).join('');
+    
+    document.getElementById('modal-overlay').classList.add('active');
+}
+
+function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('active');
+}
+
+// Event listeners
+document.getElementById('search').addEventListener('input', () => {
+    if (rankingData) renderTable(rankingData.ranking);
+});
+
+document.getElementById('region-filter').addEventListener('change', (e) => {
+    currentRegion = e.target.value;
+    if (rankingData) renderTable(rankingData.ranking);
+});
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Ignore view buttons (handled separately)
+        if (btn.id === 'view-ranking' || btn.id === 'view-tips') return;
+        document.querySelectorAll('.filter-btn[data-filter]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        if (rankingData) renderTable(rankingData.ranking);
+    });
+});
+
+// View switching
+document.getElementById('view-ranking').addEventListener('click', async () => {
+    document.getElementById('ranking-view').style.display = 'block';
+    document.getElementById('tips-view').style.display = 'none';
+    document.getElementById('view-ranking').classList.add('active');
+    document.getElementById('view-tips').classList.remove('active');
+});
+
+document.getElementById('view-tips').addEventListener('click', async () => {
+    document.getElementById('ranking-view').style.display = 'none';
+    document.getElementById('tips-view').style.display = 'block';
+    document.getElementById('view-tips').classList.add('active');
+    document.getElementById('view-ranking').classList.remove('active');
+    await loadTips();
+});
+
+document.getElementById('modal-overlay').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('modal-overlay')) closeModal();
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+});
+
+// Init
+loadData();
+loadTips();
+</script>
+
+</body>
+</html>

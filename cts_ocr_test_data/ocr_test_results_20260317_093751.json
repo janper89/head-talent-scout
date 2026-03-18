@@ -1,0 +1,214 @@
+{
+  "babytenis_jpg": {
+    "success": true,
+    "input_tokens": 3681,
+    "output_tokens": 1467,
+    "data": {
+      "turnaj": "Babytenis zima 2025 — Renáta Voráčová akademie",
+      "pocet_hracu": 9,
+      "hraci": [
+        {
+          "jmeno": "Kratča Tobiáš",
+          "klub": null,
+          "skupina": "A",
+          "umisteni_skupina": 1,
+          "umisteni_celkove": 1,
+          "zapasy": [
+            {
+              "protivnik": "Barla Alexandre",
+              "vysledek": "4:0",
+              "vyhra": true
+            },
+            {
+              "protivnik": "Kadlečka Karolína",
+              "vysledek": "4:0",
+              "vyhra": true
+            },
+            {
+              "protivnik": "Jimoělčková Sara",
+              "vysledek": "4:0",
+              "vyhra": true
+            }
+          ]
+        },
+        {
+          "jmeno": "Barla Alexandre",
+          "klub": null,
+          "skupina": "A",
+          "umisteni_skupina": 2,
+          "umisteni_celkove": 3,
+          "zapasy": [
+            {
+              "protivnik": "Kratča Tobiáš",
+              "vysledek": "0:4",
+              "vyhra": false
+            },
+            {
+              "protivnik": "Kadlečka Karolína",
+              "vysledek": "4:0",
+              "vyhra": true
+            },
+            {
+              "protivnik": "Jimoělčková Sara",
+              "vysledek": "1:4",
+              "vyhra": false
+            }
+          ]
+        },
+        {
+          "jmeno": "Kadlečka Karolína",
+          "klub": null,
+          "skupina": "A",
+          "umisteni_skupina": 3,
+          "umisteni_celkove": 4,
+          "zapasy": [
+            {
+              "protivnik": "Kratča Tobiáš",
+              "vysledek": "0:4",
+              "vyhra": false
+            },
+            {
+              "protivnik": "Barla Alexandre",
+              "vysledek": "0:4",
+              "vyhra": false
+            },
+            {
+              "protivnik": "Jimoělčková Sara",
+              "vysledek": "0:4",
+              "vyhra": false
+            }
+          ]
+        },
+        {
+          "jmeno": "Jimoělčková Sara",
+          "klub": null,
+          "skupina": "A",
+          "umisteni_skupina": 4,
+          "umisteni_celkove": 2,
+          "zapasy": [
+            {
+              "protivnik": "Kratča Tobiáš",
+              "vysledek": "0:4",
+              "vyhra": false
+            },
+            {
+              "protivnik": "Barla Alexandre",
+              "vysledek": "4:1",
+              "vyhra": true
+            },
+            {
+              "protivnik": "Kadlečka Karolína",
+              "vysledek": "4:0",
+              "vyhra": true
+            }
+          ]
+        },
+        {
+          "jmeno": "Přehnal Josef",
+          "klub": null,
+          "skupina": "B",
+          "umisteni_skupina": 1,
+          "umisteni_celkove": null,
+          "zapasy": [
+            {
+              "protivnik": "Artemev Miroslav",
+              "vysledek": "4:1",
+              "vyhra": true
+            },
+            {
+              "protivnik": "Pavelka Jakub",
+              "vysledek": "4:1",
+              "vyhra": true
+            },
+            {
+              "protivnik": "Krížová Nelly",
+              "vysledek": "4:0",
+              "vyhra": true
+            }
+          ]
+        },
+        {
+          "jmeno": "Artemev Miroslav",
+          "klub": null,
+          "skupina": "B",
+          "umisteni_skupina": 2,
+          "umisteni_celkove": null,
+          "zapasy": [
+            {
+              "protivnik": "Přehnal Josef",
+              "vysledek": "1:4",
+              "vyhra": false
+            },
+            {
+              "protivnik": "Pavelka Jakub",
+              "vysledek": "4:1",
+              "vyhra": true
+            },
+            {
+              "protivnik": "Krížová Nelly",
+              "vysledek": "4:1",
+              "vyhra": true
+            }
+          ]
+        },
+        {
+          "jmeno": "Pavelka Jakub",
+          "klub": null,
+          "skupina": "B",
+          "umisteni_skupina": 3,
+          "umisteni_celkove": null,
+          "zapasy": [
+            {
+              "protivnik": "Přehnal Josef",
+              "vysledek": "1:4",
+              "vyhra": false
+            },
+            {
+              "protivnik": "Artemev Miroslav",
+              "vysledek": "1:4",
+              "vyhra": false
+            },
+            {
+              "protivnik": "Krížová Nelly",
+              "vysledek": "0:4",
+              "vyhra": false
+            }
+          ]
+        },
+        {
+          "jmeno": "Krížová Nelly",
+          "klub": null,
+          "skupina": "B",
+          "umisteni_skupina": 4,
+          "umisteni_celkove": null,
+          "zapasy": [
+            {
+              "protivnik": "Přehnal Josef",
+              "vysledek": "0:4",
+              "vyhra": false
+            },
+            {
+              "protivnik": "Artemev Miroslav",
+              "vysledek": "1:4",
+              "vyhra": false
+            },
+            {
+              "protivnik": "Pavelka Jakub",
+              "vysledek": "4:0",
+              "vyhra": true
+            }
+          ]
+        },
+        {
+          "jmeno": "Artemev Miroslav",
+          "klub": null,
+          "skupina": null,
+          "umisteni_skupina": null,
+          "umisteni_celkove": 1,
+          "zapasy": []
+        }
+      ]
+    },
+    "error": null
+  }
+}
